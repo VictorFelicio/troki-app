@@ -1,0 +1,11 @@
+{
+    "name": "troki-app",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build": "pnpm -r run build",
+        "dev": "pnpm -r run dev"
+    },
+    "author": "Victor Felicio <victor_felicio@hotmail.com>",
+    "license": "MIT"
+}
