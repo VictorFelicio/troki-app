@@ -3,30 +3,30 @@ import { IUseCase } from '../../common/use-case';
 import { IHashService } from '../../utils/hash-service';
 import { ITokenService } from '../../utils/token-service';
 
-interface AuthUserInputDTO {
+interface Input {
     email: string;
     password: string;
 }
 
-interface AuthUserOutputDTO {
+interface Output {
     token: string;
 }
 
-export class AuthUserUseCase implements IUseCase<AuthUserInputDTO, AuthUserOutputDTO> {
+export class AuthUserUseCase implements IUseCase<Input, Output> {
     constructor(
         private readonly userRepository: IUserRepository,
         private readonly hashService: IHashService,
         private readonly tokenService: ITokenService
     ) {}
 
-    async execute(input: AuthUserInputDTO): Promise<AuthUserOutputDTO> {
-        const user = await this.userRepository.getByEmail(input.email);
+    async execute(data: Input): Promise<Output> {
+        const user = await this.userRepository.getByEmail(data.email);
 
         if (!user) {
             throw new Error('E-mail ou senha incorretos');
         }
 
-        const isValidPassword = await this.hashService.compare(input.password, user.password);
+        const isValidPassword = await this.hashService.compare(data.password, user.password);
 
         if (!isValidPassword) {
             throw new Error('E-mail ou senha incorretos');

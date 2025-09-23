@@ -2,17 +2,17 @@ import { User } from '../../../..';
 import { IUserRepository } from '../../../repositories/interface/user.repository';
 import { IUseCase } from '../../common/use-case';
 
-interface getUserInputDTO {
+interface Input {
     id: string;
 }
 
-interface getUserOutputDTO {
+interface Output {
     user: Omit<User, 'password'> | null;
 }
 
-export class GetUserByIdUseCase implements IUseCase<getUserInputDTO, getUserOutputDTO> {
+export class GetUserByIdUseCase implements IUseCase<Input, Output> {
     constructor(private readonly userRepository: IUserRepository) {}
-    async execute(input: getUserInputDTO): Promise<getUserOutputDTO> {
+    async execute(input: Input): Promise<Output> {
         const userFound = await this.userRepository.getById(input.id);
 
         if (!userFound) {
