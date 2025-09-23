@@ -7,7 +7,7 @@ export interface IProduct {
     title: string;
     description?: string;
     condition: Condition;
-    category?: string;
+    category: string;
     createdAt: Date;
     updatedAt: Date;
 }
